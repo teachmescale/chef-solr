@@ -1,0 +1,12 @@
+<%= node['solr']['log_dir'] %>/*.log {
+	daily
+	missingok
+	rotate 7
+	maxage 7
+	compress
+	compressext .gz
+	dateext
+	copytruncate
+	size 1
+	nomail
+}

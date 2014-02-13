@@ -10,5 +10,5 @@ supports 'redhat'
 supports 'centos'
 
 depends 'java', '~> 1.19.2'
-depends 'supervisor', '~> 0.4.10'
-depends 'logrotate', '~> 1.5.0'
+#depends 'supervisor', '~> 0.4.10'
+#depends 'logrotate', '~> 1.5.0'

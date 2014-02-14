@@ -1,6 +1,3 @@
-include_attribute "solr::default"
-include_attribute "solr::cloud"
-
 include_recipe "solr::default"
 include_recipe "supervisor::default"
 include_recipe "logrotate::default"

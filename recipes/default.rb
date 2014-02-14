@@ -33,6 +33,12 @@ directory node['solr']['data_dir'] do
   action :create
 end
 
+directory node['solr']['log_dir'] do
+  owner 'root'
+  group 'root'
+  action :create
+end
+
 solr_nodes = node['solr']['cloud']['shards'] + node['solr']['cloud']['replicas']
 solr_nodes.each do |node|
   bash "create #{node} config dir" do

@@ -14,7 +14,7 @@ solr_nodes.each do |node|
     code <<-EOH
         cp -r example $node
     EOH
-    environment ({'node': node})
+    environment ({'node' => node})
   end
 end
 

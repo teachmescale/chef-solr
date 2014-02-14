@@ -10,7 +10,7 @@ solr_nodes = node['solr']['cloud']['shards'] + node['solr']['cloud']['replicas']
 solr_nodes.each do |node|
   bash "create node config dir" do
     user "root"
-    cwd node['solr']['data_dir']
+    cwd "/etc/solr"
     code <<-EOH
         cp -r example $node
     EOH

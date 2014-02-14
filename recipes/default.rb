@@ -38,7 +38,7 @@ solr_nodes.each do |node|
   bash "create #{node} config dir" do
     user "root"
     code <<-EOH
-        cd #{node['solr']['dir']}
+        cd /opt/solr
         cp -r example $node
     EOH
     environment ({'node' => node})

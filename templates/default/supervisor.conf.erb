@@ -4,7 +4,7 @@ programs=<%= instances.join(",") %>
 <% instances.each_with_index do |instance, index| %>
     [program:<%= instance %>]
     priority=500
-    command=java -Xms<%= node['solr']['java']['xms'] %> -Xmx<%= node['solr']['java']['xmx'] %> -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=80 -DzkHost=<%= node['solr']['zookeeper']['cluster_servers'].join(",") %> -Dbootstrap_confdir=<%= node['solr']['bootstrap_conf_dir'] %> -Dcollection.configName=<%= node['solr']['collection']['name'] %> <% if index == 0% > -DnumShards=<%= node['solr']['cloud']['shards'].size %> <%end%> -Dsolr.solr.home=<%= node['solr']['data_dir'] %> -Djetty.port=<%= node['solr']['port'] %> -jar start.jar etc/jetty.xml
+    command=java -Xms<%= node['solr']['java']['xms'] %> -Xmx<%= node['solr']['java']['xmx'] %> -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=80 -DzkHost=<%= node['solr']['zookeeper']['cluster_servers'].join(",") %> -Dbootstrap_confdir=<%= node['solr']['bootstrap_conf_dir'] %> -Dcollection.configName=<%= node['solr']['collection']['name'] %> <% if index == 0 %> -DnumShards=<%= node['solr']['cloud']['shards'].size %> <%end%> -Dsolr.solr.home=<%= node['solr']['data_dir'] %> -Djetty.port=<%= node['solr']['port'] %> -jar start.jar etc/jetty.xml
     directory=<%= node['solr']['dir'] %>/<%= instance %>
     stdout_logfile=<%= node['solr']['log_dir'] %>/<%= instance %>.log
     stdout_logfile_maxbytes=0

@@ -6,11 +6,11 @@ service 'solr' do
   action [:disable, :stop]
 end
 
-solr_nodes = node[:solr][:cloud][:shards] + node[:solr][:cloud][:replicas]
+solr_nodes = node['solr']['cloud']['shards'] + node['solr']['cloud']['replicas']
 solr_nodes.each do |node|
   bash "create node config dir" do
     user "root"
-    cwd node[:solr][:data_dir]
+    cwd node['solr']['data_dir']
     code <<-EOH
         cp -r example $node
     EOH

@@ -9,7 +9,6 @@ include_recipe 'java'
 
 src_filename = ::File.basename(node['solr']['url'])
 src_filepath = "#{Chef::Config['file_cache_path']}/#{src_filename}"
-extract_path = node['solr']['dir']
 
 remote_file src_filepath do
   source node['solr']['url']
@@ -19,10 +18,11 @@ end
 bash 'unpack_solr' do
   cwd ::File.dirname(src_filepath)
   code <<-EOH
-    mkdir -p #{extract_path}
-    tar xzf #{src_filename} -C #{extract_path}
+    mkdir -p #{node['solr']['dir']}
+    tar xzf #{src_filename} -C '/tmp'
+    mv /tmp/solr-#{node['solr']['version']}/* #{node['solr']['dir']}
   EOH
-  not_if { ::File.exists?(extract_path) }
+  not_if { ::File.exists?(node['solr']['dir']) }
 end
 
 directory node['solr']['data_dir'] do

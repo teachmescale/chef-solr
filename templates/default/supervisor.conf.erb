@@ -5,8 +5,8 @@ programs=<%= @instances.map{|x| x[:name] }.join(",") %>
 [program:<%= instance[:name] %>]
 priority=500
 command=java -Xms<%= node['solr']['java']['xms'] %> -Xmx<%= node['solr']['java']['xmx'] %> -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=80 -DzkHost=<%= node['solr']['zookeeper']['cluster_servers'].join(",") %> -Dbootstrap_confdir=<%= node['solr']['bootstrap_conf_dir'] %> -Dcollection.configName=<%= node['solr']['collection']['name'] %> <% if index == 0 %> -DnumShards=<%= node['solr']['cloud']['shards'].size %> <%end%> -Dsolr.solr.home=<%= node['solr']['data_dir'] %> -Djetty.port=<%= instance[:port] %> -jar start.jar etc/jetty.xml
-directory=<%= node['solr']['dir'] %>/<%= instance %>
-stdout_logfile=<%= node['solr']['log_dir'] %>/<%= instance %>.log
+directory=<%= node['solr']['dir'] %>/<%= instance[:name] %>
+stdout_logfile=<%= node['solr']['log_dir'] %>/<%= instance[:name] %>.log
 stdout_logfile_maxbytes=0
 stdout_logfile_backups=0
 redirect_stderr = true

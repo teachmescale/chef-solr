@@ -41,13 +41,13 @@ end
 
 solr_nodes = node['solr']['cloud']['shards'] + node['solr']['cloud']['replicas']
 solr_nodes.each do |node|
-  bash "create #{node} config dir" do
+  bash "create #{node[:name]} config dir" do
     user "root"
     code <<-EOH
         cd /opt/solr
         cp -r example $node
     EOH
-    environment ({'node' => node})
+    environment ({'node' => node[:name]})
   end
 end
 

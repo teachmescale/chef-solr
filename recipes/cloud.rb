@@ -2,10 +2,6 @@ include_recipe "solr::default"
 include_recipe "supervisor::default"
 include_recipe "logrotate::default"
 
-service 'solr' do
-  action [:disable, :stop]
-end
-
 solr_nodes = node['solr']['cloud']['shards'] + node['solr']['cloud']['replicas']
 solr_nodes.each do |node|
   bash "create node config dir" do

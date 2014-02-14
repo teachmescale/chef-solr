@@ -9,7 +9,7 @@ include_recipe 'java'
 
 src_filename = ::File.basename(node['solr']['url'])
 src_filepath = "#{Chef::Config['file_cache_path']}/#{src_filename}"
-extract_path = "/opt/solr-#{node['solr']['version']}"
+extract_path = node['solr']['dir']
 
 remote_file src_filepath do
   source node['solr']['url']
@@ -31,27 +31,3 @@ directory node['solr']['data_dir'] do
   action :create
 end
 
-template '/var/lib/solr.start' do
-  source 'solr.start.erb'
-  owner 'root'
-  group 'root'
-  mode '0755'
-  variables(
-    :solr_dir => extract_path,
-    :solr_home => node['solr']['data_dir'],
-    :pid_file => '/var/run/solr.pid',
-    :log_file => '/var/log/solr.log'
-  )
-end
-
-template '/etc/init.d/solr' do
-  source 'initd.erb'
-  owner 'root'
-  group 'root'
-  mode '0755'
-end
-
-service 'solr' do
-  supports :restart => true, :status => true
-  action [:enable, :start]
-end

@@ -14,11 +14,9 @@ default['solr']['cloud']['shards'] = [
         :name => 'shard1',
         :port => 8984,
         :cores => [
-            {
-                :name => 'test', :instance_dir => "core0", :data_dir => "/var/solr/shard1/core0/data",
-                :name => 'dev', :instance_dir => "core1", :data_dir => "/var/solr/shard1/core1/data",
-                :name => 'prod', :instance_dir => "core2", :data_dir => "/var/solr/shard1/core2/data",
-            }
+              { :name => 'test', :instance_dir => "core0", :data_dir => "/var/solr/shard1/core0/data" },
+              { :name => 'dev', :instance_dir => "core1", :data_dir => "/var/solr/shard1/core1/data" },
+              { :name => 'prod', :instance_dir => "core2", :data_dir => "/var/solr/shard1/core2/data" },
         ],
         :default_core => 'test'
     },
@@ -26,11 +24,9 @@ default['solr']['cloud']['shards'] = [
         :name => 'shard2',
         :port => 8995,
         :cores => [
-            {
-                :name => 'test', :instance_dir => "core0", :data_dir => "/var/solr/shard2/core0/data",
-                :name => 'dev', :instance_dir => "core1", :data_dir => "/var/solr/shard2/core1/data",
-                :name => 'prod', :instance_dir => "core2", :data_dir => "/var/solr/shard2/core2/data",
-            }
+            { :name => 'test', :instance_dir => "core0", :data_dir => "/var/solr/shard2/core0/data" },
+            { :name => 'dev', :instance_dir => "core1", :data_dir => "/var/solr/shard2/core1/data" },
+            { :name => 'prod', :instance_dir => "core2", :data_dir => "/var/solr/shard2/core2/data" },
         ],
         :default_core => 'test'
     }

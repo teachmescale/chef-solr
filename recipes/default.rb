@@ -35,25 +35,25 @@ directory node['solr']['log_dir'] do
 end
 
 solr_nodes = node['solr']['cloud']['shards'] + node['solr']['cloud']['replicas']
-solr_nodes.each do |node|
-  bash "create #{node[:name]} config dir" do
+solr_nodes.each do |instance|
+  bash "create #{instance[:name]} config dir" do
     user "root"
+    cwd node['solr']['dir']
     code <<-EOH
-        cd /opt/solr
         cp -r example $node
         chmod 777 $node/solr-webapp
         rm $node/solr/solr.xml
     EOH
-    environment ({'node' => node[:name]})
+    environment ({'node' => instance[:name]})
   end
 
-  template "/opt/solr/#{node[:name]}/solr/solr.xml" do
+  template "#{node['solr']['dir']}/#{instance[:name]}/solr/solr.xml" do
     source 'solr.xml.erb'
     owner  'root'
     group  'root'
     mode   '0644'
     variables({
-      :port => node[:port],
+      :port => instance[:port],
       :cores => instance[:cores],
       :default_core => instance[:default_core]
     })

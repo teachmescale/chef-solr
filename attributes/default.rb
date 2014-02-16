@@ -7,7 +7,6 @@
 
 default['solr']['version']  = '4.6.1'
 default['solr']['url']      = "https://archive.apache.org/dist/lucene/solr/#{node['solr']['version']}/solr-#{node['solr']['version']}.tgz"
-default['solr']['data_dir'] = '/etc/solr'
 default['solr']['dir'] = "/opt/solr-#{node['solr']['version']}"
 default['solr']['zookeeper']['cluster_servers'] = ['zoo1.example.com:2181', 'zoo2.example.com:2181', 'zoo3.example.com:2181']
 default['solr']['cloud']['shards'] = [

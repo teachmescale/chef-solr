@@ -27,11 +27,6 @@ bash 'unpack_solr' do
   not_if { ::File.exists?(node['solr']['dir']) }
 end
 
-directory node['solr']['data_dir'] do
-  owner 'root'
-  group 'root'
-  action :create
-end
 
 directory node['solr']['log_dir'] do
   owner 'root'

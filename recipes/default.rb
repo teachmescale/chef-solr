@@ -27,10 +27,10 @@ bash 'unpack_solr' do
   not_if { ::File.exists?(node['solr']['dir']) }
 end
 
-
 directory node['solr']['log_dir'] do
   owner 'root'
   group 'root'
+  recursive true
   action :create
 end
 
@@ -42,8 +42,31 @@ solr_nodes.each do |node|
         cd /opt/solr
         cp -r example $node
         chmod 777 $node/solr-webapp
+        rm $node/solr/solr.xml
     EOH
     environment ({'node' => node[:name]})
+  end
+
+  template "/opt/solr/#{node[:name]}/solr/solr.xml" do
+    source 'solr.xml.erb'
+    owner  'root'
+    group  'root'
+    mode   '0644'
+    variables({
+      :port => node[:port],
+      :cores => instance[:cores],
+      :default_core => instance[:default_core]
+    })
+  end
+
+  instance[:cores].each do |core|
+    directory core[:data_dir] do
+      owner 'root'
+      group 'root'
+      mode '0777'
+      recursive true
+      action :create
+    end
   end
 end
 
@@ -67,4 +90,3 @@ end
 execute 'supervisorctl update' do
   user 'root'
 end
-

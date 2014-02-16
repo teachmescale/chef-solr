@@ -48,7 +48,7 @@
   You can read more about SolrCloud mode at http://wiki.apache.org/solr/SolrCloud
   -->
   <cores adminPath="/admin/cores" defaultCoreName="<%= @default_core %>" host="${host:}" hostPort="<%= @port %>" hostContext="${hostContext:solr}" zkClientTimeout="${zkClientTimeout:60000}">
-<% @cores do |core| %>
+<% @cores.each do |core| %>
     <core name="<%= core[:name] %>" instanceDir="<%= core[:instance_dir] %>">
       <property name="solr.data.dir" value="<%= core[:data_dir] %>" />
     </core>

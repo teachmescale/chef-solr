@@ -41,6 +41,7 @@ solr_nodes.each do |node|
     code <<-EOH
         cd /opt/solr
         cp -r example $node
+        chmod 777 $node/solr-webapp
     EOH
     environment ({'node' => node[:name]})
   end
